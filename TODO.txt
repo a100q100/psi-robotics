@@ -1,0 +1,25 @@
+
+TODO:
+    Controle do projeto:
+        Ao fazer modificações (adicionar componentes ou mudar configuração) e
+            o usuário tentar fechar o programa, perguntar se deseja salvar
+
+        Ao fazer modificações (adicionar componentes ou mudar configuração) e
+            o usuário tentar abrir outro projeto, perguntar se deseja salvar
+
+    Sistema em geral:
+        Ao riseze, manter o centro da camera
+        Arrumar a splash screen (escrever texto nela, e usá-la no MainLoop)
+
+    Fix de componentes
+        (parcial) Ao aconteer algum erro, parar a simulação e mostrar mensagem
+            - Como parar a simulação?
+
+    Componentes:
+        Implementar Aria robot (campo para conexões)
+        Implementar Manual Controller
+        Implmenetar Campos Potenciais (mapas himm, temperatura, e opcional de vetores)
+
+
+
+EXEMPLO projeto.psi

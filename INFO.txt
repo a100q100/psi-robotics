@@ -1,0 +1,116 @@
+Project control
+
+    PSI ROBOTS system organizes the user work into projects. A PSI project 
+    stores the information about components. While a project is opened, the app
+    store its information.
+
+    new project: a new project is created, cleaning all information from memory
+                 about the old project.
+
+    save project: save the current state to the current project, if there is no
+                  project opened, the save as dialog is showed.
+
+    save project as: a dialog is opened to save the current state to the new 
+                     project.
+
+    open project: close the current project and open a saved project.
+
+
+Simulation environment (DONE)
+
+    The simulation environment is divided into 3 states:
+
+    running: when user clicks at RUN button, the system starts the simulation, 
+             in which, at first, the app will call the `on_run` function to
+             initialize all components. While running, the system call the 
+             on_update function for all components every frame. At this points,
+             the button RUN is disabled, while buttons PAUSE and STOP are 
+             enabled.
+
+    paused: when user clicks at PAUSE button, the system pauses the simulation
+            at current state, the on_pause function is called for all 
+            components and on_update is suspended until the state is paused. 
+            The user must press the RUN button to continue the simulation.
+            While in this state, the RUN and STOP buttons are enabled and PAUSE
+            button is disabled.
+
+    stopped: the default state of the system. While running or paused, the user
+             can click at STOP button to stop the simulation, calling the 
+             on_stop method of all components. While in this state, the RUN 
+             button is the only enabled, and STOP and PAUSE buttons are 
+             disabled. While stopped, only on_draw method is called.
+
+    With this system, the component can, for example, make a connection when
+    the simulation starts, and close the connection at its end.
+
+
+Component-based system
+
+    PSI ROBOTS system is component-based, it means that in a project, several 
+    independent or semi-independent, reusable, and flexible components can be
+    add to the system. All components working relatively to the simulation 
+    system, and each component is responsible for its own execution. Notice 
+    that each component can attend its own events, e.g., treating the keyboard
+    inputs.
+
+    A component life-cycle follows the points:
+
+    loading: a list of components is loaded at the initialization of the system
+             or when user clicks at ADD COMPONENT FOLDER. The components are 
+             identified by its name and roles (robot, mapper or controller).
+
+    adding: the user can add a loaded component to its project via system or 
+            by programming. The user can click at ADD COMPONENT, which will pop
+            up a dialog with all loaded components, then user can select which
+            component will be added to the project and click ok. The components
+            currently included at the project stays at the sidebar in component
+            list.
+
+    maintaining: user can click at the components at component list to see its 
+                 options, which will be appear at the sidebar, below the 
+                 component list. Each component implements these options with
+                 its method ui_options. The only option found in all components
+                 is the name, which can be modified by clicking in it at the 
+                 list.
+
+    running: the component are active when the simulation is running.
+
+    removing: user can remove a component, by clicking in the component and 
+              clicking at REMOVE COMPONENT
+
+
+Visual system
+
+    The draw is limited to 24 fps. The visual system has several features:
+
+    camera/zoom in: the user can zoom in the canvas by scrolling the mouse 
+                    wheel, pressing + button or by menu in camera->zoom in.
+
+    camera/zoom out: the user can zoom in the canvas by scrolling the mouse 
+                     wheel, pressing - button or by menu in camera->zoom out.
+
+    camera/reset zoom: the user can reset the zoom by menu in camera->reset 
+                       zoom.
+
+    camera/center: this option center the camera at the (0, 0), this feature 
+                   can be accessed at menu by camera->center.
+
+    camera/follow robot: by accessing camera->follow robot, the camera centers
+                         at the robot position.
+
+    camera/moving: user can move the camera by dragging and dropping the mouse
+                   middle button .
+
+    grid: user can toggle the grid by pressing G
+
+
+Core components
+    
+    BaseRobot
+    BaseGridMapper
+
+    ReplayRobot             rules: Robot
+    AriaRobot               rules: Robot
+    HimmMapper              rules: Mapper
+    PotentialFields         rules: Mapper/Controller
+    ManualController        rules: Controller
